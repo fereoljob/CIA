@@ -1,0 +1,29 @@
+
+.con {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+    text-align: center;
+}
+
+.login-form {
+
+    width:500px;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.login-buttons .btn {
+    width: 100%;
+}
+.card-title{
+    color: #3b82f6;
+}

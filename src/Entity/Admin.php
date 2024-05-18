@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
+#[UniqueEntity('login')]
 class Admin
 {
     #[ORM\Id]
@@ -14,9 +17,11 @@ class Admin
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email]
     private ?string $login = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\length(min: 5)]
     private ?string $password = null;
 
     public function getId(): ?int

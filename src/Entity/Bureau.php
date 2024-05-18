@@ -6,8 +6,12 @@ use App\Repository\BureauRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: BureauRepository::class)]
+#[UniqueEntity('num_bureau')]
 class Bureau
 {
     #[ORM\Id]
@@ -19,9 +23,13 @@ class Bureau
     private ?string $num_bureau = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?int $capacite_max = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
     private ?int $num_etage = null;
 
     /**
