@@ -15,8 +15,6 @@ class Statut
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idEntity = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -37,17 +35,6 @@ class Statut
         return $this->id;
     }
 
-    public function getIdEntity(): ?int
-    {
-        return $this->idEntity;
-    }
-
-    public function setIdEntity(int $idEntity): static
-    {
-        $this->idEntity = $idEntity;
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
