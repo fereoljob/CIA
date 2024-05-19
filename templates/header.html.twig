@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8 d-flex align-items-center">
-                <img src="{{ asset('images/ua2.png') }}" alt="Logo de l'université" class="img-fluid" style="max-height: 100px;">
-                <a href="{{ path('app_login') }}" class="btn btn-outline-light ml-5">Connexion</a>
+                <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/ua2.png') }}" alt="Logo de l'université" class="img-fluid" style="max-height: 100px;"></a>
+                <a href="{{ path( app.user != null ? 'app_logout' : 'app_login' ) }}" class="btn btn-outline-light ml-5">{{ app.user != null ? 'Déconnexion' : 'Connexion' }}</a>
             </div>
             <div class="col-md-4 text-right">
                 <form class="form-inline" action="{{ path('app_search') }}" method="get">
