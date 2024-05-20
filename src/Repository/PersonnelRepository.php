@@ -33,6 +33,45 @@ class PersonnelRepository extends ServiceEntityRepository
 
     }
 
+    public function listPersonnelOdered($ordered):array{
+        $req= $this->createQueryBuilder('p')
+                ->orderBy('p.nom',$ordered?:'ASC')
+                ->addOrderBy('p.prenom','ASC')
+                ->getQuery()
+                ->getResult();
+        return $req;
+    }
+
+    public function listPersonnelGroupedByBureau($orderBy):array{
+        $req= $this->createQueryBuilder('p')
+            ->innerJoin('p.bureau','b')
+            ->addSelect('b')
+            ->orderBy('b.num_bureau',$orderBy ?: 'ASC')
+            ->addOrderBy('p.nom','ASC');
+        $result = $req->getQuery()->getResult();
+           $groupedByBureau = [];
+           foreach($result as $personne){
+               $bureau= $personne->getBureau()->getNumBureau();
+               $groupedByBureau[$bureau][] = $personne;
+
+
+           }
+        return $groupedByBureau;
+
+    }
+
+    public function listPersonnelOrderedByDateEnd($orderBy): array{
+        $req= $this->createQueryBuilder('p')
+
+           ->join('p.statut','s')
+            ->addSelect('s')
+            ->where('s.name NOT LIKE :statut')
+            ->setParameter('statut', '%titulaire%')
+            ->orderBy('p.dateEnd', $orderBy?:'ASC');
+            $result= $req->getQuery()->getResult();
+             return $result;
+    }
+
     //    /**
     //     * @return Personnel[] Returns an array of Personnel objects
     //     */
