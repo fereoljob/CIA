@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Personnel;
 use App\Repository\PersonnelRepository;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,9 +66,7 @@ class TriListController extends AbstractController
     public function ledit(): Response
     {
 
-        return $this->render('tri_list/listPersonnel.html.twig', [
-
-        ]);
+        return $this->render('tri_list/listPersonnel.html.twig');
     }
 
 
@@ -79,9 +75,7 @@ class TriListController extends AbstractController
     public function delete(): Response
     {
 
-        return $this->render('tri_list/listPersonnel.html.twig', [
-
-        ]);
+        return $this->render('tri_list/listPersonnel.html.twig');
     }
 
 }

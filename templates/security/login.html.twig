@@ -33,8 +33,9 @@
                     </div>
                     <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
                 </div>
-                <div class="soumis">
+                <div class="soumis" class="row col-md-5">
                     <input type="submit" class="btn btn-primary" name="envoyer" value="Se connecter" />
+                    <input type="reset" class="btn btn-danger" name="effacer" value="Efaccer" />
                 </div> 
             </form>
         </div>
