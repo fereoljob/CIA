@@ -1,20 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends 'administration/baseAdmin.html.twig' %}
+{% block title %} Administration {% endblock %}
 
-{% block title %}Hello AdministrationController!{% endblock %}
+{% block content %}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+	<div class="container-fluid">
+		<div class="row jumbotron mt-5">
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+				<p class="lead"> <i class="fas fa-exclamation-circle"></i>&nbsp; &nbsp; Commencez par écrire un nom dans la barre de recherche pour retrouver la personne</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+			</div>
+		</div>
+	</div>
+    
+	
+	<script>
+		let users = document.querySelector("#utilisateurs");
+		users.addEventListener('click',function(){
+			let divU = document.querySelector(".affiUser");
+			divU.style.display ="inline-block";
+			let bout = document.querySelector("#cacher");
+			bout.style.display ="inline";
+		});
+		let bouton  = document.querySelector("#cacher");
+		bouton.addEventListener('click',function(e){
+			let divU = document.querySelector(".affiUser");
+			divU.style.display = "none";
+			e.target.style.display ="none";
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+		});
+		let dep = document.querySelector("#departements");
+		dep.addEventListener('click',function(){
+			let divD = document.querySelector(".affidep");
+			divD.style.display ="inline-block";
+			let bout1 = document.querySelector("#cacher1");
+			bout1.style.display ="inline";
+		});
+		let bouton1  = document.querySelector("#cacher1");
+		bouton1.addEventListener('click',function(e){
+			let divD = document.querySelector(".affidep");
+			divD.style.display = "none";
+			e.target.style.display ="none";
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/etud/CIA/PA/CIA/src/Controller/AdministrationController.php</code></li>
-        <li>Your template at <code>/home/etud/CIA/PA/CIA/templates/administration/index.html.twig</code></li>
-    </ul>
-</div>
+		});
+	</script>
 {% endblock %}

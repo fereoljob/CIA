@@ -1,0 +1,329 @@
+
+.con {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+
+    text-align: center;
+}
+
+.login-form {
+
+    width:500px;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.login-buttons .btn {
+    width: 100%;
+}
+.card-title{
+    color: #3b82f6;
+}
+
+/* J.F CSS */
+html,body{
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+.card-login
+{
+    width:780px;
+    height:370px;
+    margin-top:110px;
+}
+.titre
+{
+    color:white;
+    margin-top:100px;
+    font-size:60px;
+    font-weight:bold;
+    font-family:Cursive;
+}
+
+.champs1
+{
+  width:350px;
+  display: inline;
+   margin-left:40px;
+}
+.champs
+{
+    width:350px;
+    display: inline;
+    margin-left:15px;
+}
+.checkbox
+{
+            margin-left:260px;
+}
+.soumis
+{
+            margin-left:260px;
+}
+.tete
+{
+    height: 60px;
+}
+.titresect
+{
+    padding:5px;
+    border-bottom: 5px solid black;
+    width: 2000px;
+    text-align: left;
+}
+.troiscol
+{
+    width: 330px;
+}
+.valModAff
+{
+    margin-left: 200px;
+}
+.filtre
+{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    font-size: large;
+    font-weight:bold;
+}
+.lefiltre
+{
+    margin-left: 80px;
+}
+.mescols
+{
+    height: 100px;
+}
+
+
+.one
+{
+    height: 100px;
+    border-radius:10px;
+}
+.aside
+{
+    
+    border-radius:10px;
+}
+.perso
+{
+    border-bottom: 2px solid white;
+    padding-top:7px;
+    padding-bottom:7px;
+    text-align: center;
+}
+.uliste
+{
+    list-style-type:none;
+    font-size: 17px;
+}
+.uliste2
+{
+    list-style-type:none;
+    font-size: 17px;
+    padding-bottom: 35px;
+}
+.uliste2 a
+{
+    text-decoration: none;
+    color:white;
+    border:1px solid transparent;
+    display:block;
+}
+.uliste2 a:hover
+{
+    background-color:darkslategray;
+    padding:4px;
+    color:white;
+}
+.acc a:hover
+{
+    text-decoration: none;
+    color:white;
+    font-size: 26px;
+
+}
+.uliste a {
+    border:1px solid white;
+    display: block;
+    color:white;
+    text-decoration: none;
+}
+.uliste a:hover
+{
+    background-color:darkslategray;
+    padding:4px;
+}
+.form-control
+{
+    display: inline;
+    width: 350px;
+}
+.card-form select
+{
+    display: inline;
+    width: 350px;
+}
+.card-form table
+{
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+.card-form
+{
+    border-bottom: 2px solid gray;
+    border-left:  2px solid gray;
+}
+.card-header
+{
+    background-color: gray;
+    color:white;
+}
+.contenu1 caption {
+    padding: 10px;
+    caption-side: top;
+}
+.contenu1 td,.contenu1 th
+{
+    width: 250px;
+    border: 2px solid black;
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.contenu1 td,.contenu1 th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 7px 5px;
+}
+
+
+.contenu1 th {
+    background-color: rgb(235, 235, 235);
+}
+.generation th
+{
+    background-color:rgb(235, 235, 235);
+}
+
+.contenu1 td {
+    text-align: center;
+}
+.generation td
+{
+    text-align: center;
+}
+
+.contenu1 tr:nth-child(even) td {
+    background-color: rgb(250, 250, 250);
+}
+.generation tr:nth-child(even) td
+{
+    background-color: rgb(250, 250, 250);
+}
+
+.contenu1 tr:nth-child(odd) td {
+    background-color: rgb(240, 240, 240);
+}
+.generation tr:nth-child(odd) td
+{
+    background-color:rgb(240, 240, 240);
+}
+.panneau a
+{
+    display: block;
+    background-color: gray;
+    color:white;
+    border-radius: 25% 10%;
+    text-decoration: none;
+    padding:40px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+.panneau a:hover
+{
+    background-color: darkgray;
+    padding:50px;
+}
+.a1
+{
+    float:right;
+}
+.a2
+{
+    float:left;
+}
+.lien
+{
+    font-size:25px;
+    font-weight: bold;
+}
+.gen h1
+{
+    margin-top: 150px;
+    color:white;
+}
+.general
+{
+    margin-top:100px;
+}
+.target
+{
+    float:right;
+}
+
+.generation {
+    overflow-x: auto;
+}
+tbody>tr:first-child>*{
+    border-top: 0;
+}
+
+.generation table,.generation td,.generation th
+{
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 8px 12px;
+    text-align: center;
+}
+.generation tbody{
+    display: table-row-group;
+    vertical-align: middle;
+}
+.separation{
+    border-bottom: 3px solid black;
+}
+.partie td{
+    width: 100px
+}
+.profs.prof_1 td{
+    height: 80px !important;
+}
+.profs.prof_2 td{
+    height: 80px !important;
+}
+.profs.prof_3 td{
+    height: 80px !important;
+}
+.details td{
+
+    height: 80px !important;
+}
+.editable
+{
+    font-size:18px;
+}
+/* J.F CSS */

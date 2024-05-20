@@ -14,8 +14,6 @@ class Personnel
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $num_pers = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
@@ -42,17 +40,6 @@ class Personnel
         return $this->id;
     }
 
-    public function getNumPers(): ?int
-    {
-        return $this->num_pers;
-    }
-
-    public function setNumPers(int $num_pers): static
-    {
-        $this->num_pers = $num_pers;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {

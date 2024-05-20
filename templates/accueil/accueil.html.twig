@@ -8,13 +8,9 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% include 'header.html.twig' %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/etud/CIA/PA/CIA/src/Controller/AccueilController.php</code></li>
-        <li>Your template at <code>/home/etud/CIA/PA/CIA/templates/accueil/index.html.twig</code></li>
-    </ul>
-</div>
+{% endblock %}
+{% block footer %}
+{% include 'footer.html.twig' %}
 {% endblock %}

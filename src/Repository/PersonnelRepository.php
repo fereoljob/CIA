@@ -16,6 +16,23 @@ class PersonnelRepository extends ServiceEntityRepository
         parent::__construct($registry, Personnel::class);
     }
 
+    public  function  searchUser(String $search):array{
+        $req= $this->createQueryBuilder('p');
+           // ->innerJoin('p.bureau','b')
+            //->innerJoin('p.statut','s')
+           // ->addSelect('b','s');
+            if($search != null && $search != ""){
+                $req->where('p.nom LIKE :search OR p.prenom LIKE :search' );
+
+                //$req ->andWhere('p.nom LIKE :search OR p.prenom LIKE :search OR b.num_bureau LIKE :search OR s.name LIKE :search' )
+                $req ->setParameter('search',$search.'%');
+                return $req->getQuery()->getResult();
+
+            }
+            return  [];
+
+    }
+
     //    /**
     //     * @return Personnel[] Returns an array of Personnel objects
     //     */
