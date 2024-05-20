@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row align-items-center justify-content-between">
             <div class="col-md-4 d-flex align-items-center">
-                <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/ua2.png') }}" alt="Logo de l'université" class="img-fluid mr-md-4" style="max-height: 100px;"></a>
+                <a href="{{ path('app_accueil', ) }}"><img src="{{ asset('images/ua2.png') }}" alt="Logo de l'université" class="img-fluid mr-md-4" style="max-height: 100px;"></a>
                 <a href="{{ path( app.user != null ? 'app_logout' : 'app_login' ) }}" class="btn btn-outline-light">{{ app.user != null ? 'Déconnexion' : 'Connexion' }}</a>
             </div>
             <div class="col-md-5">
