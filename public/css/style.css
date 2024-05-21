@@ -1,4 +1,7 @@
 
+.etage-nom {
+    cursor: crosshair;
+}
 .con {
     display: flex;
 
