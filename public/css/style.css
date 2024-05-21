@@ -330,3 +330,6 @@ tbody>tr:first-child>*{
     font-size:18px;
 }
 /* J.F CSS */
+.table{
+    width: 50%;
+}

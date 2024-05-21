@@ -35,30 +35,32 @@
             </div>
         </div>
 
-        <div>
+        <div class="container-fluid">
 
             {% if filterType == 'bureauPersonne' %}
 
             {% for bureau, person in personnes %}
             <h3>{{ bureau }}</h3>
 
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-striped" >
+                <thead class="table-secondary" >
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col"></th>
+                    {% if app.user  %}
+                    <th scope="col"  class="text-center" style="width: 150px;"  ></th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for pers in person %}
                     <tr>
-                        <td>{{ pers.nom }} {{ pers.prenom }}</td>
+                        <td >{{ pers.nom }} {{ pers.prenom }}</td>
 
                         {% if app.user  %}
                             <td>
                                 <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
 
-
+                                <span class="ml-3"></span>
                                 <form action="#" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
@@ -75,15 +77,16 @@
                 </tbody>
             </table>
             {% endfor %}
+
             {% else %}
-
-
-                <table class="table table-striped">
+                <table class="table table-striped"  >
                     <thead>
                     <tr>
                         <th scope="col">Nom</th>
                         <th scope="col">Bureau</th>
-                        <th scope="col"></th>
+                        {% if app.user  %}
+                            <th scope="col"  class="text-center" style="width: 150px;"  ></th>
+                        {% endif %}
                     </tr>
                     </thead>
                     <tbody>
@@ -94,7 +97,7 @@
                             {% if app.user  %}
                                 <td>
                                     <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-
+                                    <span class="ml-3"></span>
                                     <form action="#" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
