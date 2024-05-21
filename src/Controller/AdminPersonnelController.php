@@ -37,7 +37,7 @@ class AdminPersonnelController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($personnel);
             $em->flush();
-            $this->addFlash('success','Ajout reussi!');
+            $this->addFlash('success','Modification reussie!');
             return $this->redirectToRoute('app_administration');   
         }
 

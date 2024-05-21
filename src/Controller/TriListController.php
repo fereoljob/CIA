@@ -29,7 +29,7 @@ class TriListController extends AbstractController
          }
         // $personnes = $repository->listPersonnel();
 
-        return $this->render('tri_list/listPersonnel.html.twig', [
+        return $this->render('trilist/triListPersonnel.html.twig', [
             'personnes' => $result,
             'filterType' => $filterType,
             'orderBy' => $orderBy,
@@ -61,21 +61,5 @@ class TriListController extends AbstractController
 
 */
 
-
-    #[Route('/editPers', name: 'edit_person')]
-    public function ledit(): Response
-    {
-
-        return $this->render('tri_list/listPersonnel.html.twig');
-    }
-
-
-
-    #[Route('/deletePers', name: 'delete_person')]
-    public function delete(): Response
-    {
-
-        return $this->render('tri_list/listPersonnel.html.twig');
-    }
 
 }

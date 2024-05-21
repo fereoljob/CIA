@@ -3,13 +3,29 @@
 {% block title %}Hello Accueil Controller!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-    {% include 'header.html.twig' %}
 
+{% include 'header.html.twig' %}
+    <div class="container">
+        <div class=" mt-3" >
+        <form method="get" action="">
+            <label for="etage" >N° Etage: </label>
+            <select name="etage" class="form-control">
+                <option value="1" selected>1</option>
+                <option value="2" >2</option>
+            </select>
+        </form>
+        </div>
+    </div>
+    {% if etage is defined %}
+        {% if etage == 1%}
+            {% include 'accueil/etage1.html.twig' %}
+        {% else %}
+            {% include 'accueil/etage2.html.twig' %}
+        {% endif %}
+    {% else %}
+        {% include 'accueil/etage1.html.twig' %}
+    {% endif %}
 {% endblock %}
 {% block footer %}
 {% include 'footer.html.twig' %}
