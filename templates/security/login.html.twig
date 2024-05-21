@@ -26,6 +26,7 @@
                         <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control champs1" placeholder="login" autocomplete="username" required autofocus >
                     </div>
                 </div>
+                <br>
                 <div class="form-group text-center">
                     <div class="form-label-group">
                         <label for="inputPassword"><strong>Mot de passe :</strong></label>
@@ -33,7 +34,8 @@
                     </div>
                     <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
                 </div>
-                <div class="soumis" class="row col-md-5">
+                <br>
+                <div class="soumis">
                     <input type="submit" class="btn btn-primary" name="envoyer" value="Se connecter" />
                 </div> 
             </form>
