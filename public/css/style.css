@@ -330,6 +330,20 @@ tbody>tr:first-child>*{
     font-size:18px;
 }
 /* J.F CSS */
+
 .table{
     width: 50%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex: 1;
 }
