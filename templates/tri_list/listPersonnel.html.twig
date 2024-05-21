@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TriListController!{% endblock %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+
+    <div class="container mt-4">
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <form method="post" action="{{ path('app_listUser') }}" class="d-flex justify-content-end align-items-center">
+                    <div class="form-group me-2">
+                        <label>
+                            <select name="filterType" class="form-control">
+                                <option selected>Choisissez un type</option>
+                                <option value="personnes">Liste personne</option>
+                                <option value="bureauPersonne">Liste par bureau</option>
+                                <option value="dateEndPersonne">Liste par dateEnd</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="form-group me-2">
+                        <label>
+                            <select name="orderBy" class="form-control">
+                                <option selected>Ordre alphabétique</option>
+                                <option value="asc">A-Z</option>
+                                <option value="desc">Z-A</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Filtrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+
+            {% if filterType == 'bureauPersonne' %}
+
+            {% for bureau, person in personnes %}
+            <h3>{{ bureau }}</h3>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pers in person %}
+                    <tr>
+                        <td>{{ pers.nom }} {{ pers.prenom }}</td>
+
+                        {% if app.user  %}
+                            <td>
+                                <a href="{{ path('edit_person', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+
+
+                                <form action="{{ path('delete_person', {'id': pers.id}) }}" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+
+                            </td>
+                        {% endif %}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endfor %}
+            {% else %}
+
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Bureau</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pers in personnes %}
+                        <tr>
+                            <td>{{ pers.nom }} {{ pers.prenom }}</td>
+                            <td>{{ pers.bureau.numBureau }}</td>
+                            {% if app.user  %}
+                                <td>
+                                    <a href="{{ path('edit_person', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+
+                                    <form action="{{ path('delete_person', {'id': pers.id}) }}" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
