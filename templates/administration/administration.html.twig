@@ -17,35 +17,4 @@
 		</div>
 	</div>
     
-	
-	<script>
-		let users = document.querySelector("#utilisateurs");
-		users.addEventListener('click',function(){
-			let divU = document.querySelector(".affiUser");
-			divU.style.display ="inline-block";
-			let bout = document.querySelector("#cacher");
-			bout.style.display ="inline";
-		});
-		let bouton  = document.querySelector("#cacher");
-		bouton.addEventListener('click',function(e){
-			let divU = document.querySelector(".affiUser");
-			divU.style.display = "none";
-			e.target.style.display ="none";
-
-		});
-		let dep = document.querySelector("#departements");
-		dep.addEventListener('click',function(){
-			let divD = document.querySelector(".affidep");
-			divD.style.display ="inline-block";
-			let bout1 = document.querySelector("#cacher1");
-			bout1.style.display ="inline";
-		});
-		let bouton1  = document.querySelector("#cacher1");
-		bouton1.addEventListener('click',function(e){
-			let divD = document.querySelector(".affidep");
-			divD.style.display = "none";
-			e.target.style.display ="none";
-
-		});
-	</script>
 {% endblock %}

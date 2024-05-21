@@ -1,0 +1,18 @@
+{% extends 'administration/baseAdmin.html.twig' %}
+{% block title %} Administration - statut{% endblock %}
+
+{% block content %}
+<div class="card card-form mt-2">
+    <div class="card-body">
+        <form method="GET" action="{{ path('admin_modify_statut') }}">
+            <label for="statut" > Nom :</label>
+            <select name="statut" class="form-control">
+                {% for statut in statuts %}
+                <option value="{{ statut.id }}">{{ statut.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" class="btn btn-primary" value="Modifier" />
+        </form>
+    </div>
+</div>
+{% endblock %}

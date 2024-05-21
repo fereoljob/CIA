@@ -33,12 +33,12 @@ class PersonnelType extends AbstractType
             ])
             ->add('statut', EntityType::class, [
                 'class' => Statut::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'label'=> 'Statut: '
             ])
             ->add('bureau', EntityType::class, [
                 'class' => Bureau::class,
-                'choice_label' => 'id',
+                'choice_label' => 'num_bureau',
                 'label'=> 'Bureau: '
             ])
             ->add('Valider',SubmitType::class)
