@@ -29,4 +29,20 @@ class AdminPersonnelController extends AbstractController
             'controller_name' => 'AdminPersonnelController','form'=> $form
         ]);
     }
+    #[Route('/admin/personnel/{id}/edit', name:'admin_edit_personnel')]
+    public function modify(Personnel $personnel,Request $request,EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(PersonnelType::class, $personnel);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($personnel);
+            $em->flush();
+            $this->addFlash('success','Ajout reussi!');
+            return $this->redirectToRoute('app_administration');   
+        }
+
+        return $this->render('administration/personnelAdministration/modify.html.twig', [
+            'controller_name' => 'AdminPersonnelController','form'=> $form
+        ]);
+    }
 }

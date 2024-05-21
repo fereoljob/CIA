@@ -54,21 +54,7 @@
                     <tr>
                         <td>{{ pers.nom }} {{ pers.prenom }}</td>
 
-                        {% if app.user  %}
-                            <td>
-                                <a href="{{ path('edit_person', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-
-
-                                <form action="{{ path('delete_person', {'id': pers.id}) }}" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-
-                            </td>
-                        {% endif %}
+                        
                     </tr>
 
                 {% endfor %}
