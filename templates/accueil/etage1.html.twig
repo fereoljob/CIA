@@ -1,4 +1,32 @@
-<div class="container">
+
+<style>
+
+   .svg-container {
+      flex: 2;
+      border-right: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+
+   .info-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+   }
+
+   .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+   }
+
+</style>
+
+
+
+<div class="svg-container">
    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
    <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
@@ -233,12 +261,11 @@
 
    </svg>
 
-
-
-      <div id="card-parent" class="card" style="display:none">
+   <div class="info-container">
+      <div id="card-parent" class="card border-info mb-3" style="display:none">
          <div class="card-body"></div>
       </div>
-
+   </div>
 
 
    <script>
@@ -283,21 +310,20 @@
               <div class="person-cards"></div>
           </div>
       `;
-      
+
       const personCardsContainer = bureauCard.querySelector('.person-cards');
 
       data.forEach(person => {
           const card = document.createElement('div');
-          card.classList.add('card', 'mb-2');  
-          card.innerHTML = `
-              <div class="card-header">${person.nom} ${person.prenom}</div>
+          //card.classList.add('card', 'mb-2');
+     card.innerHTML = `
+              <p class="card-title">${person.nom} ${person.prenom}</p>
               <div class="card-body">
-                  <h5 class="card-title">${person.statut}</h5>
+                  <p class="card-text">${person.statut}</p>
                   <p class="card-text">Date d'arrivée : ${person.dateStart}</p>
+                  <p class="card-text">Date départ : ${person.dateEnd}</p>
               </div>
-              <div class="card-footer">
-                  <small class="text-body-secondary">Date de départ ${person.dateEnd}</small>
-              </div>
+
           `;
           personCardsContainer.appendChild(card);
       });

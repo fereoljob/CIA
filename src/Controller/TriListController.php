@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PersonnelRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class TriListController extends AbstractController
 {
     #[Route('/Pers', name: 'app_listUser')]
-    public function listPersonne(Request $request, PersonnelRepository $repository): Response
+    public function listPersonne(Request $request, PersonnelRepository $repository,PaginatorInterface $paginator): Response
     {
          $filterType = $request->request->get('filterType');
          $orderBy = $request->request->get('orderBy');
@@ -29,10 +30,16 @@ class TriListController extends AbstractController
          }
         // $personnes = $repository->listPersonnel();
 
+        $pagination = $paginator->paginate(
+            $result,
+            $request->query->getInt('page', 1),
+            5/*limit per page*/
+        );
         return $this->render('trilist/triListPersonnel.html.twig', [
-            'personnes' => $result,
+            'personnes' => $pagination,
             'filterType' => $filterType,
             'orderBy' => $orderBy,
+            'pagination' => $pagination,
         ]);
     }
 
