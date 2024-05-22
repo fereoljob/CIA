@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Bureau;
+use App\Repository\BureauRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,8 @@ class AccueilController extends AbstractController
 {
     private $personnelRepository;
 
-    public function __construct(PersonnelRepository $personnelRepository){
+    public function __construct(PersonnelRepository $personnelRepository)
+    {
         $this->personnelRepository = $personnelRepository;
     }
 
@@ -26,10 +29,28 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/etage1/bureau/{id}', name: 'etage')]
-    public function getBureauInfo(string $id): JsonResponse {
-      $personnes = $this ->personnelRepository->findBy(['bureau' => $id]);
- 
+    #[Route('/etage1/bureau/{num}', name: 'etage')]
+    public function getBureauInfo($num, BureauRepository $repository): JsonResponse
+    {
+
+        $bureau = $repository->findOneBy(['num_bureau' => $num]);
+        if (!$bureau) {
+            throw $this->createNotFoundException('Bureau non trouvé pour ce numéro');
+        }
+        $personnes = $bureau->getPersonnels();
+        $data = [];
+        foreach ($personnes as $personne) {
+            $data[] = [
+                'nom' => $personne->getNom(),
+                'prenom' => $personne->getPrenom(),
+                'statut' => $personne->getStatut()->getName(),
+                'dateStart'=>$personne->getDateStart()->format('Y-m-d'),
+                'dateEnd'=>$personne->getDateEnd()->format('Y-m-d'),
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
       /*
       $donneesPersonne = [
         ['nom' => 'Doe', 'prenom' => 'John', 'statut' => 'Doctorant', 'dateStart' => new DateTime('2023-01-01'), 'dateEnd' => null],
@@ -48,7 +69,7 @@ class AccueilController extends AbstractController
         
         $personnes[] = $personne;
     }
-    */
+
          $data = [];
  
          foreach ($personnes as $personne) {
@@ -63,4 +84,5 @@ class AccueilController extends AbstractController
  
          return new JsonResponse($data);
      }
+      */
 }

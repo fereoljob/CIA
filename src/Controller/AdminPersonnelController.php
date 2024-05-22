@@ -44,5 +44,14 @@ class AdminPersonnelController extends AbstractController
         return $this->render('administration/personnelAdministration/modify.html.twig', [
             'controller_name' => 'AdminPersonnelController','form'=> $form
         ]);
+
+    }
+    #[Route('/admin/personnel/{id}/', name:'admin_delete_personnel')]
+    public function delete(Personnel $personnel, Request $request, EntityManagerInterface $em): Response
+    {
+        $em->remove($personnel);
+        $em->flush();
+        $this->addFlash('success','Suppression reussie');
+        return $this->redirectToRoute('app_administration');
     }
 }
