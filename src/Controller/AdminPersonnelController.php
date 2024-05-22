@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Personnel;
 use App\Form\PersonnelType;
+use App\Entity\Bureau;
 
 class AdminPersonnelController extends AbstractController
 {
@@ -19,10 +20,17 @@ class AdminPersonnelController extends AbstractController
         $form = $this->createForm(PersonnelType::class, $personnel);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($personnel);
-            $em->flush();
-            $this->addFlash('success','Ajout reussi!');
-            return $this->redirectToRoute('app_administration');   
+            $totalbureau = $em->getRepository(Personnel::class)->findTotalPersonnelByBureau($personnel->getBureau()->getId());
+            $capacitebureau = $personnel->getBureau()->getCapaciteMax();
+            if ($totalbureau >= $capacitebureau) {
+                $this->addFlash('Echec',"Echec lors de l'ajout: capacité max atteinte pour ce bureau");
+                return $this->redirectToRoute("app_administration");
+            }else{
+                $em->persist($personnel);
+                $em->flush();
+                $this->addFlash('success','Ajout reussi!');
+                return $this->redirectToRoute('app_administration');
+            }   
         }
 
         return $this->render('administration/personnelAdministration/ajout.html.twig', [
@@ -44,5 +52,13 @@ class AdminPersonnelController extends AbstractController
         return $this->render('administration/personnelAdministration/modify.html.twig', [
             'controller_name' => 'AdminPersonnelController','form'=> $form
         ]);
+    }
+    #[Route('/admin/personnel/{id}/', name:'admin_delete_personnel')]
+    public function delete(Personnel $personnel, Request $request, EntityManagerInterface $em): Response
+    {
+        $em->remove($personnel);
+        $em->flush();
+        $this->addFlash('success','Suppression reussie');
+        return $this->redirectToRoute('app_administration');
     }
 }

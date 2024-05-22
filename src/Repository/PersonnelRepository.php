@@ -96,4 +96,12 @@ class PersonnelRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findTotalPersonnelByBureau($id){
+        return $this->createQueryBuilder('p')
+        ->select('SUM(p.nom) as total')
+        ->where('p.bureau = :id ')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
 }
