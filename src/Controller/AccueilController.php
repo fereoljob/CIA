@@ -44,8 +44,8 @@ class AccueilController extends AbstractController
                 'nom' => $personne->getNom(),
                 'prenom' => $personne->getPrenom(),
                 'statut' => $personne->getStatut()->getName(),
-                'dateStart'=>$personne->getDateStart()->format('Y-m-d'),
-                'dateEnd'=>$personne->getDateEnd()->format('Y-m-d'),
+            //    'email'=>$personne->getEmail(),
+            //    'telephone'=>$personne->getTelephone(),
             ];
         }
 

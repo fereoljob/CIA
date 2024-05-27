@@ -22,6 +22,18 @@
       margin-bottom: 10px;
    }
 
+   .d-flex {
+      display: flex;
+  }
+  
+  .justify-content-between {
+      justify-content: space-between;
+  }
+  
+  .align-items-center {
+      align-items: center;
+  }
+
 </style>
 
 
@@ -297,7 +309,7 @@
       function displayBureauInfo(data, bureauId) {
       const parentCard = document.getElementById('card-parent');
 
-      parentCard.style.display ='block';
+      parentCard.style ='display:block';
       const cardGroup = document.querySelector('.card');
       cardGroup.innerHTML = '';
 
@@ -305,7 +317,10 @@
       bureauCard.classList.add('card');
       
       bureauCard.innerHTML = `
-          <div class="card-header">Bureau ${bureauId}</div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+            <span>Bureau ${bureauId}</span>
+            <button type="button" class="btn btn-outline-info close-btn" onclick="closeCard()">x</button>
+        </div>
           <div class="card-body">
               <div class="person-cards"></div>
           </div>
@@ -320,14 +335,20 @@
               <p class="card-title">${person.nom} ${person.prenom}</p>
               <div class="card-body">
                   <p class="card-text">${person.statut}</p>
-                  <p class="card-text">Date d'arrivée : ${person.dateStart}</p>
-                  <p class="card-text">Date départ : ${person.dateEnd}</p>
+                  <p class="card-text">email : ${person.email}</p>
+                  <p class="card-text">numéro : ${person.telephone}</p>
               </div>
+              <hr/>
 
           `;
           personCardsContainer.appendChild(card);
       });
       cardGroup.appendChild(bureauCard);
+      }
+
+      function closeCard() {
+         const parentCard = document.getElementById('card-parent');
+         parentCard.style.display = 'none';
       }
   </script>
 
