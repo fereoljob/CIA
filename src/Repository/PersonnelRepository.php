@@ -34,8 +34,11 @@ class PersonnelRepository extends ServiceEntityRepository
     }
 
     public function listPersonnelOdered($ordered):array{
+        if (!in_array($ordered, ['ASC', 'DESC'])) {
+            $ordered = 'ASC';
+        }
         $req= $this->createQueryBuilder('p')
-                ->orderBy('p.nom',$ordered?:'ASC')
+                ->orderBy('p.nom',$ordered)
                 ->addOrderBy('p.prenom','ASC')
                 ->getQuery()
                 ->getResult();
@@ -43,10 +46,14 @@ class PersonnelRepository extends ServiceEntityRepository
     }
 
     public function listPersonnelGroupedByBureau($orderBy):array{
+
+        if (!in_array($orderBy, ['ASC', 'DESC'])) {
+            $orderBy = 'ASC';
+        }
         $req= $this->createQueryBuilder('p')
             ->innerJoin('p.bureau','b')
             ->addSelect('b')
-            ->orderBy('b.num_bureau',$orderBy ?: 'ASC')
+            ->orderBy('b.num_bureau',$orderBy )
             ->addOrderBy('p.nom','ASC');
         $result = $req->getQuery()->getResult();
            $groupedByBureau = [];
@@ -61,15 +68,20 @@ class PersonnelRepository extends ServiceEntityRepository
     }
 
     public function listPersonnelOrderedByDateEnd($orderBy): array{
-        $req= $this->createQueryBuilder('p')
+        if (!in_array($orderBy, ['ASC', 'DESC'])) {
+            $orderBy = 'ASC';
+        }
 
-           ->join('p.statut','s')
+        $req = $this->createQueryBuilder('p')
+            ->join('p.statut', 's')
             ->addSelect('s')
             ->where('s.name NOT LIKE :statut')
             ->setParameter('statut', '%titulaire%')
-            ->orderBy('p.dateEnd', $orderBy?:'ASC');
-            $result= $req->getQuery()->getResult();
-             return $result;
+            ->orderBy('p.dateEnd', $orderBy);
+
+        $result = $req->getQuery()->getResult();
+        return $result;
+
     }
 
     //    /**

@@ -5,12 +5,13 @@
                 <a href="{{ path('app_accueil', ) }}">
                     <img src="{{ asset('images/ua2.png') }}" alt="Logo de l'université" class="navbar-brand" style="max-height: 100px;">
                 </a>
-                <a href="{{ path('app_listUser') }}" class="nav-link active text-white {{ app.request.attributes.get('_route') == 'app_listUser' ? 'disabled' : '' }}" >
+              {#  <a href="{{ path('app_listUser') }}" class="nav-link active text-white {{ app.request.attributes.get('_route') == 'app_listUser' ? 'disabled' : '' }}" >
                     List Personnels
                 </a>
                 <a href="{{ path('app_accueil') }}" class="nav-link active text-white {{ app.request.attributes.get('_route') == 'app_accueil' ? 'disabled' : '' }}">
                     Accueil
                 </a>
+              #}
                 <div class="d-flex align-items-center">
                     <form class="d-flex" role="search" action="{{ path('app_search') }}" method="get">
                         <input class="form-control me-2" type="text" name="search" placeholder="Rechercher..." value="{{ app.request.query.get('search') }}" style="width: 200px;">
@@ -30,3 +31,33 @@
         </nav>
     </div>
 </header>
+
+<nav class="navbar navbar-expand-lg bg-info-subtle">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+
+                    <a href="{{ path('app_accueil') }}" class="nav-link active {{ app.request.attributes.get('_route') == 'app_accueil' ? 'disabled' : '' }}">
+                        Accueil
+                    </a>
+
+
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('app_listUser') }}" class="nav-link active {{ app.request.attributes.get('_route') == 'app_listUser' ? 'disabled' : '' }}" >
+                        Liste Personnels
+                    </a>
+                </li>
+             {% if app.user != null %}
+                <li class="nav-item">
+                    <a href="{{ path('app_administration') }}" class="nav-link active {{ app.request.attributes.get('_route') == 'app_administration' ? 'disabled' : '' }}" >
+                        page Admin
+                    </a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

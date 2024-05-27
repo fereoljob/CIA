@@ -18,14 +18,25 @@ class TriListController extends AbstractController
          $filterType = $request->request->get('filterType');
          $orderBy = $request->request->get('orderBy');
          $result = [];
-         if($filterType === 'personnes'){
-             $result = $repository->listPersonnelOdered($orderBy);
+         $error = null;
+         if ($request->isMethod('POST')) {
+             if (empty($filterType) || empty($orderBy)) {
+                 $error = "Veillez selectionnner un type ";
+
+             } else {
+
+                 if ($filterType === 'personnes') {
+                     $result = $repository->listPersonnelOdered($orderBy);
+                 } else if ($filterType === 'bureauPersonne') {
+                     $result = $repository->listPersonnelGroupedByBureau($orderBy);
+                 } else if ($filterType === 'dateEndPersonne') {
+                     $result = $repository->listPersonnelOrderedByDateEnd($orderBy);
+                 } else {
+                     $result = $repository->findAll();
+                 }
+             }
          }
-         else if($filterType === 'bureauPersonne'){
-             $result = $repository->listPersonnelGroupedByBureau($orderBy);
-         }else if($filterType === 'dateEndPersonne'){
-             $result = $repository->listPersonnelOrderedByDateEnd($orderBy);
-         }else{
+         else {
              $result = $repository->findAll();
          }
         // $personnes = $repository->listPersonnel();
@@ -40,6 +51,7 @@ class TriListController extends AbstractController
             'filterType' => $filterType,
             'orderBy' => $orderBy,
             'pagination' => $pagination,
+            'error' => $error,
         ]);
     }
 

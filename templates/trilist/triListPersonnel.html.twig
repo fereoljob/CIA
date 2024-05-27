@@ -9,23 +9,21 @@
             <div class="col-md-12">
                 <form method="post" action="{{ path('app_listUser') }}" class="d-flex justify-content-end align-items-center">
                     <div class="form-group me-2">
-                        <label>
-                            <select name="filterType" class="form-control">
-                                <option selected>Choisissez un type</option>
-                                <option value="personnes">Liste personne</option>
-                                <option value="bureauPersonne">Liste par bureau</option>
-                                <option value="dateEndPersonne">Liste par dateEnd</option>
-                            </select>
-                        </label>
+                        <label for="filterType">Type de filtre</label>
+                        <select id="filterType" name="filterType" class="form-control" required>
+                            <option value="" selected disabled>Sélectionnez une option</option>
+                            <option value="personnes" {% if filterType == 'personnes' %}selected{% endif %}>Personnes</option>
+                            <option value="bureauPersonne" {% if filterType == 'bureauPersonne' %}selected{% endif %}>Bureau </option>
+                            <option value="dateEndPersonne" {% if filterType == 'dateEndPersonne' %}selected{% endif %}>Date End </option>
+                        </select>
                     </div>
                     <div class="form-group me-2">
-                        <label>
-                            <select name="orderBy" class="form-control">
-                                <option selected>Ordre alphabétique</option>
-                                <option value="asc">A-Z</option>
-                                <option value="desc">Z-A</option>
-                            </select>
-                        </label>
+                        <label for="orderBy">Trier par</label>
+                        <select id="orderBy" name="orderBy" class="form-control" required>
+                            <option value="" selected disabled>Sélectionnez une option</option>
+                            <option value="ASC" {% if orderBy == 'ASC' %}selected{% endif %}>A-Z</option>
+                            <option value="DESC" {% if orderBy == 'DESC' %}selected{% endif %}>Z-A</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Filtrer</button>
@@ -35,6 +33,12 @@
         </div>
 
         <div class="container-fluid">
+            {% if error %}
+                <div class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+            {% endif %}
+
             {% if filterType == 'bureauPersonne' %}
                 {% for bureau, person in personnes %}
                     <h3>{{ bureau }}</h3>
@@ -53,12 +57,12 @@
                                 <td>{{ pers.nom }} {{ pers.prenom }}</td>
                                 {% if app.user  %}
                                     <td>
-                                        <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>
                                         <span class="ml-3"></span>
                                         <form action="#" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
-                                            <button type="submit" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-outline-danger">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -68,9 +72,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <div class="navigation">
-                        {{ knp_pagination_render(pagination) }}
-                    </div>
+
                 {% endfor %}
             {% else %}
                 <table class="table table-striped">
@@ -90,12 +92,12 @@
                             <td>{{ pers.bureau.numBureau }}</td>
                             {% if app.user  %}
                                 <td>
-                                    <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>
                                     <span class="ml-3"></span>
                                     <form action="#" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
-                                        <button type="submit" class="btn btn-danger">
+                                        <button type="submit" class="btn btn-outline-danger">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
                                     </form>
