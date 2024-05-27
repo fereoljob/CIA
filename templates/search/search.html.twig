@@ -18,9 +18,11 @@
                         <div class="card border-info mb-3" style="max-width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">{{ user.nom }} {{ user.prenom }}</h5>
-                                <p class="card-text">
+                                <p class="card-text" style="color: #555555;">
                                     Bureau: {{ user.bureau.numBureau }}<br>
                                     Statut: {{ user.statut.name }}<br>
+                                    Addr: {{ user.mail }}<br>
+                                    Téléphone: {{ user.telephone }}<br>
                                    {#  <strong>Date de sortie:</strong> {{ user.dateStart|date('d-m-Y') }} #}
                                 </p>
                             </div>

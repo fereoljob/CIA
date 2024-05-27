@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\PersonnelRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: PersonnelRepository::class)]
+#[UniqueEntity('email', 'telephone')]
 class Personnel
 {
     #[ORM\Id]
@@ -34,6 +36,14 @@ class Personnel
     #[ORM\ManyToOne(inversedBy: 'personnels')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Bureau $bureau = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\Positive]
+    private ?int $telephone = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Email]
+    private ?string $mail = null;
 
     public function getId(): ?int
     {
@@ -109,6 +119,30 @@ class Personnel
     public function setBureau(?Bureau $bureau): static
     {
         $this->bureau = $bureau;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?int
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?int $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): static
+    {
+        $this->mail = $mail;
 
         return $this;
     }

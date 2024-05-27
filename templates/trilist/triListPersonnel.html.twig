@@ -46,6 +46,8 @@
                         <thead class="table-secondary">
                         <tr>
                             <th scope="col">Nom</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Numéro</th>
                             {% if app.user  %}
                                 <th scope="col" class="text-center" style="width: 150px;"></th>
                             {% endif %}
@@ -54,7 +56,9 @@
                         <tbody>
                         {% for pers in person %}
                             <tr>
-                                <td>{{ pers.nom }} {{ pers.prenom }}</td>
+                                <td style="color: #555555;">{{ pers.nom }} {{ pers.prenom }}</td>
+                                <td style="color: #555555;">{{ pers.mail }}</td>
+                                <td style="color: #2563EB;">{{ pers.telephone }}</td>
                                 {% if app.user  %}
                                     <td>
                                         <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>
@@ -80,6 +84,8 @@
                     <tr>
                         <th scope="col">Nom</th>
                         <th scope="col">Bureau</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Numéro</th>
                         {% if app.user  %}
                             <th scope="col" class="text-center" style="width: 150px;"></th>
                         {% endif %}
@@ -88,8 +94,10 @@
                     <tbody>
                     {% for pers in personnes %}
                         <tr>
-                            <td>{{ pers.nom }} {{ pers.prenom }}</td>
-                            <td>{{ pers.bureau.numBureau }}</td>
+                            <td style="color: #555555;">{{ pers.nom }} {{ pers.prenom }}</td>
+                            <td style="color: #555555;">{{ pers.bureau.numBureau }}</td>
+                            <td style="color: #555555;">{{ pers.mail }} </td>
+                            <td style="color: #2563EB;">{{ pers.telephone }} </td>
                             {% if app.user  %}
                                 <td>
                                     <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>
