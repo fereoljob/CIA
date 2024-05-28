@@ -102,7 +102,7 @@
                                 <td>
                                     <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>
                                     <span class="ml-3"></span>
-                                    <form action="#" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
+                                    <form action="{{ path('admin_delete_personnel',{'id': pers.id})}}" method="post" onsubmit="return confirm('Voulez vous supprimer ?');" style="display: inline;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ pers.id) }}">
                                         <button type="submit" class="btn btn-outline-danger">
