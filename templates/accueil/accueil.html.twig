@@ -11,8 +11,8 @@
         <form method="post" action="{{ path('accueil_etage') }}">
             <label for="etage" >N° Etage: </label>
             <select name="etage" class="form-control">
-                <option value="1" selected>1</option>
-                <option value="2" >2</option>
+                <option value="1" {% if etage is defined %} {% if etage == 1 %} {{ "selected" }} {% endif %} {% else %} {{ "selected" }} {% endif %}>1</option>
+                <option value="2" {% if etage is defined %} {% if etage == 2 %} {{ "selected" }} {% endif %} {% endif %}>2</option>
             </select>
             <input type="submit" class="btn btn-primary" value="Valider" />
         </form>
