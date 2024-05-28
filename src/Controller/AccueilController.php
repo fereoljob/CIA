@@ -6,6 +6,7 @@ use App\Entity\Bureau;
 use App\Repository\BureauRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\PersonnelRepository;
@@ -50,6 +51,15 @@ class AccueilController extends AbstractController
         }
 
         return new JsonResponse($data);
+    }
+    #[Route('/accueil/etage', name:'accueil_etage')]
+    public function etage(Request $request): Response
+    {
+        $num = $request->get('etage');
+        return $this->render('accueil/accueil.html.twig', [
+            'controller_name' => 'AccueilController',
+            'etage' => $num,
+        ]);
     }
       /*
       $donneesPersonne = [
