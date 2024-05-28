@@ -19,6 +19,7 @@ class AdminPersonnelController extends AbstractController
         $form = $this->createForm(PersonnelType::class, $personnel);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($personnel);
             $em->persist($personnel);
             $em->flush();
             $this->addFlash('success','Ajout reussi!');

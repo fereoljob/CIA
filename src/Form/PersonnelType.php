@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\Bureau;
 use App\Entity\Personnel;
 use App\Entity\Statut;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class PersonnelType extends AbstractType
 {
@@ -30,6 +32,12 @@ class PersonnelType extends AbstractType
             ->add('dateEnd', null, [
                 'widget' => 'single_text',
                 'label'=> "Date de départ: "
+            ])
+            ->add('telephone',NumberType::class, [
+                'label'=> 'téléphone:'
+            ])
+            ->add('mail',EmailType::class,[
+                'label'=> 'Mail:'
             ])
             ->add('statut', EntityType::class, [
                 'class' => Statut::class,
