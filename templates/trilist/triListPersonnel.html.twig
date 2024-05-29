@@ -14,7 +14,9 @@
                             <option value="" selected disabled>Sélectionnez une option</option>
                             <option value="personnes" {% if filterType == 'personnes' %}selected{% endif %}>Personnes</option>
                             <option value="bureauPersonne" {% if filterType == 'bureauPersonne' %}selected{% endif %}>Bureau </option>
+                            {% if app.user !=null%}
                             <option value="dateEndPersonne" {% if filterType == 'dateEndPersonne' %}selected{% endif %}>Date End </option>
+                            {%endif %}
                         </select>
                     </div>
                     <div class="form-group me-2">
@@ -86,6 +88,9 @@
                         <th scope="col">Bureau</th>
                         <th scope="col">Adresse</th>
                         <th scope="col">Numéro</th>
+                        {% if app.user != null %}
+                          <th scope="col">Date de sortie</th>
+                        {% endif %}
                         {% if app.user  %}
                             <th scope="col" class="text-center" style="width: 150px;"></th>
                         {% endif %}
@@ -98,6 +103,9 @@
                             <td style="color: #555555;">{{ pers.bureau.numBureau }}</td>
                             <td style="color: #555555;">{{ pers.mail }} </td>
                             <td style="color: #2563EB;">{{ pers.telephone }} </td>
+                             {% if app.user  %}
+                            <td style="color: #2563EB;">{{ pers.dateEnd | date('d-m-Y') }} </td>
+                             {% endif %}
                             {% if app.user  %}
                                 <td>
                                     <a href="{{ path('admin_edit_personnel', {'id': pers.id}) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i></a>

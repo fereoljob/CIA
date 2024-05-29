@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: PersonnelRepository::class)]
-#[UniqueEntity('email', 'telephone')]
+#[UniqueEntity('mail', 'telephone')]
 class Personnel
 {
     #[ORM\Id]
