@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Personnel;
 use App\Form\PersonnelType;
+use App\Entity\Bureau;
 
 class AdminPersonnelController extends AbstractController
 {
@@ -19,11 +20,27 @@ class AdminPersonnelController extends AbstractController
         $form = $this->createForm(PersonnelType::class, $personnel);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($personnel);
-            $em->persist($personnel);
-            $em->flush();
-            $this->addFlash('success','Ajout reussi!');
-            return $this->redirectToRoute('app_administration');   
+            if($personnel->getDateStart() > $personnel->getDateEnd()) {
+                $this->addFlash('notice',"La date de départ ne doit pas être inférieure à la date d'arrivée" );
+                $form = $this->createForm(PersonnelType::class,$personnel);
+                return $this->render('administration/personnelAdministration/ajout.html.twig', [
+                    'controller_name' => 'AdminPersonnelController','form'=> $form
+                ]);
+
+            }else{
+                $total = $em->getRepository(Personnel::class)->findTotalPersonnelByBureau($personnel->getBureau()->getId());
+                $total = $total[0]['total'];
+                $capacitebureau = ($em->getRepository(Bureau::class)->findBy(['id'=>$personnel->getBureau()->getId()])[0])->getCapaciteMax();
+                if($total < $capacitebureau){
+                    $em->persist($personnel);
+                    $em->flush();  
+                    $this->addFlash('success','Ajout reussi!');
+                    return $this->redirectToRoute('app_administration'); 
+                }else{
+                    $this->addFlash('notice','Echec: Capacité max bureau atteinte !');
+                    return $this->redirectToRoute('app_administration');   
+                }
+            }
         }
 
         return $this->render('administration/personnelAdministration/ajout.html.twig', [
@@ -36,10 +53,27 @@ class AdminPersonnelController extends AbstractController
         $form = $this->createForm(PersonnelType::class, $personnel);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($personnel);
-            $em->flush();
-            $this->addFlash('success','Modification reussie!');
-            return $this->redirectToRoute('app_administration');   
+            if($personnel->getDateStart() > $personnel->getDateEnd()) {
+                $this->addFlash('notice',"La date de départ ne doit pas être inférieure à la date d'arrivée" );
+                $form = $this->createForm(PersonnelType::class,$personnel);
+                return $this->render('administration/personnelAdministration/modify.html.twig', [
+                    'controller_name' => 'AdminPersonnelController','form'=> $form
+                ]);
+
+            }else{
+                $total = $em->getRepository(Personnel::class)->findTotalPersonnelByBureau($personnel->getBureau()->getId());
+                $total = $total[0]['total'];
+                $capacitebureau = ($em->getRepository(Bureau::class)->findBy(['id'=>$personnel->getBureau()->getId()])[0])->getCapaciteMax();
+                if($total < $capacitebureau){
+                    $em->persist($personnel);
+                    $em->flush();  
+                    $this->addFlash('success','Modification reussie!');
+                    return $this->redirectToRoute('app_administration'); 
+                }else{
+                    $this->addFlash('notice','Echec: Capacité max bureau atteinte !');
+                    return $this->redirectToRoute('app_administration');   
+                }
+            }
         }
 
         return $this->render('administration/personnelAdministration/modify.html.twig', [
