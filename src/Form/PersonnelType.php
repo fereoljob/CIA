@@ -33,7 +33,7 @@ class PersonnelType extends AbstractType
                 'widget' => 'single_text',
                 'label'=> "Date de départ: "
             ])
-            ->add('telephone',NumberType::class, [
+            ->add('telephone',TextType::class, [
                 'label'=> 'téléphone:'
             ])
             ->add('mail',EmailType::class,[
